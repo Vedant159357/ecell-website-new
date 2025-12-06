@@ -3,27 +3,66 @@ const Event = require("../models/Event");
 
 const router = express.Router();
 
-// Add a new event
-router.post("/add", async (req, res) => {
+// CREATE event
+router.post("/", async (req, res) => {
   try {
-    const event = new Event(req.body);
-    await event.save();
-    res.json({ success: true, event });
+    const event = await Event.create(req.body);
+    res.json(event);
   } catch (err) {
-    res.status(500).json({ success: false, error: err.message });
+    res.status(500).json({ error: err.message });
   }
 });
 
-// Get all events
+// GET all events
 router.get("/", async (req, res) => {
-  const events = await Event.find().sort({ date: 1 });
-  res.json(events);
+  try {
+    const events = await Event.find().sort({ date: -1 });
+    res.json(events);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
-// Get upcoming event
+// GET upcoming event
 router.get("/upcoming", async (req, res) => {
-  const event = await Event.findOne({ isUpcoming: true });
-  res.json(event);
+  try {
+    const event = await Event.findOne({ isUpcoming: true });
+    res.json(event);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// GET single event
+router.get("/:id", async (req, res) => {
+  try {
+    const event = await Event.findById(req.params.id);
+    res.json(event);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// UPDATE event
+router.put("/:id", async (req, res) => {
+  try {
+    const event = await Event.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    res.json(event);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// DELETE event
+router.delete("/:id", async (req, res) => {
+  try {
+    await Event.findByIdAndDelete(req.params.id);
+    res.json({ message: "Event deleted" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 module.exports = router;

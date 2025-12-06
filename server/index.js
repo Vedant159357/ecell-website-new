@@ -3,32 +3,49 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 
+// Import Routes
+const eventRoutes = require("./routes/eventRoutes");
+const guestRoutes = require("./routes/guestRoutes");
+const teamRoutes = require("./routes/teamRoutes");
+const facultyRoutes = require("./routes/facultyRoutes");
+const paymentRoutes = require("./routes/paymentRoutes");
+
 const app = express();
+
+// ----------------------
+// MIDDLEWARE
+// ----------------------
 app.use(cors());
 app.use(express.json());
 
-app.use("/api/events", require("./routes/eventRoutes"));
-
-app.use("/api/payment", require("./routes/paymentRoutes"));
-
-// ---------- CONNECT TO MONGODB ----------
+// ----------------------
+// CONNECT MONGODB
+// ----------------------
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.log("MongoDB Error:", err));
 
-// ---------- BASIC ROUTES ----------
+// ----------------------
+// API ROUTES
+// ----------------------
+app.use("/api/events", eventRoutes);
+app.use("/api/guests", guestRoutes);
+app.use("/api/team", teamRoutes);
+app.use("/api/faculty", facultyRoutes);
+app.use("/api/payment", paymentRoutes);
+
+// ----------------------
+// BASE ROUTE
+// ----------------------
 app.get("/", (req, res) => {
-  res.send("E-Cell Backend Running");
+  res.send("E-Cell Backend Running Successfully 🚀");
 });
 
-// Example route for events (we will replace later)
-app.get("/api/events", (req, res) => {
-  res.json({ message: "Events API working" });
-});
-
-// ---------- START SERVER ----------
+// ----------------------
+// START SERVER
+// ----------------------
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+app.listen(PORT, () =>
+  console.log(`Server running on http://localhost:${PORT}`)
+);
