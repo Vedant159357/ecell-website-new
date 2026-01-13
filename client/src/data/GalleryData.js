@@ -2,7 +2,7 @@
 const imageCount = 19; // 
 
 const photos = Array.from({ length: imageCount }, (_, i) => 
-  `/gallery/${i + 1}.JPG`
+  `/gallery/${i + 1}.jpg`
 );
 
 // Debug: Log all photo paths
