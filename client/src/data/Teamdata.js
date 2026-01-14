@@ -17,7 +17,7 @@ import shyam from "../assets/core-members/Shyam.jpg";
 import kaushal from "../assets/core-members/Kaushal Masare.jpg";
 import shubh from "../assets/core-members/Shubham Sharma.jpg";
 import shantanu from "../assets/core-members/Shantanu Mapre.jpg";
-import ketan from "../assets/core-members/Ketan patil.jpg";
+import ketan from "../assets/core-members/Ketan Patil.jpg";
 import vedant from "../assets/core-members/Vedant satpute.jpg";
 import rutu from "../assets/core-members/Rutuja Yelgate.jpg";
 
