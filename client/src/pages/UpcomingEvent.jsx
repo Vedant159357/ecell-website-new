@@ -10,7 +10,7 @@ export default function UpcomingEvent() {
   // Fetch upcoming event from backend
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/events/upcoming")
+      .get(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/events/upcoming`)
       .then((res) => {
         setEvent(res.data);
         setLoading(false);

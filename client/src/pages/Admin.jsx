@@ -52,10 +52,10 @@ export default function Admin() {
   useEffect(() => {
     setLoading(true);
     Promise.all([
-      axios.get("http://localhost:5000/api/events"),
-      axios.get("http://localhost:5000/api/team"),
-      axios.get("http://localhost:5000/api/guests"),
-      axios.get("http://localhost:5000/api/faculty"),
+      axios.get(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/events`),
+      axios.get(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/team`),
+      axios.get(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/guests`),
+      axios.get(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/faculty`),
     ])
       .then(([eventsRes, teamRes, guestsRes, facultyRes]) => {
         setEvents(eventsRes.data || []);
@@ -83,50 +83,62 @@ export default function Admin() {
     e.preventDefault();
     try {
       if (modalEntity === "event") {
-        const res = await axios.post("http://localhost:5000/api/events", {
-          title: formData.title,
-          description: formData.description,
-          shortDescription: formData.shortDescription,
-          banner: formData.banner,
-          date: formData.date,
-          price: Number(formData.price) || 0,
-          isUpcoming: formData.isUpcoming === "true",
-        });
+        const res = await axios.post(
+          `${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/events`,
+          {
+            title: formData.title,
+            description: formData.description,
+            shortDescription: formData.shortDescription,
+            banner: formData.banner,
+            date: formData.date,
+            price: Number(formData.price) || 0,
+            isUpcoming: formData.isUpcoming === "true",
+          }
+        );
         setEvents((prev) => [res.data, ...prev]);
       }
 
       if (modalEntity === "team") {
-        const res = await axios.post("http://localhost:5000/api/team", {
-          name: formData.name,
-          role: formData.role,
-          image: formData.image,
-          linkedin: formData.linkedin,
-          instagram: formData.instagram,
-          github: formData.github,
-        });
+        const res = await axios.post(
+          `${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/team`,
+          {
+            name: formData.name,
+            role: formData.role,
+            image: formData.image,
+            linkedin: formData.linkedin,
+            instagram: formData.instagram,
+            github: formData.github,
+          }
+        );
         setTeam((prev) => [res.data, ...prev]);
       }
 
       if (modalEntity === "guest") {
-        const res = await axios.post("http://localhost:5000/api/guests", {
-          name: formData.name,
-          role: formData.role,
-          image: formData.image,
-          linkedin: formData.linkedin,
-          instagram: formData.instagram,
-          website: formData.website,
-          description: formData.description,
-        });
+        const res = await axios.post(
+          `${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/guests`,
+          {
+            name: formData.name,
+            role: formData.role,
+            image: formData.image,
+            linkedin: formData.linkedin,
+            instagram: formData.instagram,
+            website: formData.website,
+            description: formData.description,
+          }
+        );
         setGuests((prev) => [res.data, ...prev]);
       }
 
       if (modalEntity === "faculty") {
-        const res = await axios.post("http://localhost:5000/api/faculty", {
-          name: formData.name,
-          title: formData.title,
-          department: formData.department,
-          image: formData.image,
-        });
+        const res = await axios.post(
+          `${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/faculty`,
+          {
+            name: formData.name,
+            title: formData.title,
+            department: formData.department,
+            image: formData.image,
+          }
+        );
         setFaculty((prev) => [res.data, ...prev]);
       }
 
@@ -144,19 +156,27 @@ export default function Admin() {
 
     try {
       if (entity === "event") {
-        await axios.delete(`http://localhost:5000/api/events/${id}`);
+        await axios.delete(
+          `${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/events/${id}`
+        );
         setEvents((prev) => prev.filter((e) => e._id !== id));
       }
       if (entity === "team") {
-        await axios.delete(`http://localhost:5000/api/team/${id}`);
+        await axios.delete(
+          `${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/team/${id}`
+        );
         setTeam((prev) => prev.filter((m) => m._id !== id));
       }
       if (entity === "guest") {
-        await axios.delete(`http://localhost:5000/api/guests/${id}`);
+        await axios.delete(
+          `${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/guests/${id}`
+        );
         setGuests((prev) => prev.filter((g) => g._id !== id));
       }
       if (entity === "faculty") {
-        await axios.delete(`http://localhost:5000/api/faculty/${id}`);
+        await axios.delete(
+          `${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/faculty/${id}`
+        );
         setFaculty((prev) => prev.filter((f) => f._id !== id));
       }
     } catch (err) {
@@ -605,11 +625,10 @@ export default function Admin() {
                 <button
                   key={sec}
                   onClick={() => setActiveSection(sec)}
-                  className={`block w-full text-left px-3 py-2 rounded-md text-sm ${
-                    activeSection === sec
+                  className={`block w-full text-left px-3 py-2 rounded-md text-sm ${activeSection === sec
                       ? "bg-[#00eaff]/20 text-[#00eaff]"
                       : "text-gray-300 hover:bg-white/5"
-                  }`}
+                    }`}
                 >
                   {sec}
                 </button>
@@ -642,12 +661,12 @@ export default function Admin() {
           modalEntity === "event"
             ? "Add Event"
             : modalEntity === "team"
-            ? "Add Team Member"
-            : modalEntity === "guest"
-            ? "Add Guest"
-            : modalEntity === "faculty"
-            ? "Add Faculty"
-            : ""
+              ? "Add Team Member"
+              : modalEntity === "guest"
+                ? "Add Guest"
+                : modalEntity === "faculty"
+                  ? "Add Faculty"
+                  : ""
         }
       >
         {renderModalContent()}

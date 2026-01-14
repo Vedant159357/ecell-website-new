@@ -9,13 +9,13 @@ import cyberking from "../assets/sponcors/Cyberking.png";
 import glint from "../assets/sponcors/Glint.png";
 import grabon from "../assets/sponcors/Grabon.png";
 import kds from "../assets/sponcors/KD's Blackwood Cafe.jpg";
-import hackersera from "../assets/sponcors/Hackersera.png";
+import hackersera from "../assets/sponcors/hackersera_logo.png";
 import khadad from "../assets/sponcors/Khadad Punekar.jpg";
 import massit from "../assets/sponcors/MASSIT.png";
 import offroute from "../assets/sponcors/Off Route Adventure.jpg";
 import paradox from "../assets/sponcors/Paradox Entertainment.svg";
 import reliance from "../assets/sponcors/Reliance digital.png";
-import phoenix from "../assets/sponcors/Phoenix.png";
+import phoenix from "../assets/sponcors/phoenix_logo.png";
 import skulz from "../assets/sponcors/Skulz Energy.jpeg";
 import stockgro from "../assets/sponcors/Stockgrow.png";
 import studx from "../assets/sponcors/StudX.jpg";
@@ -54,8 +54,8 @@ const sponsors = [
   { id: 23, name: "True Elements", image: trueel },
   { id: 24, name: "Zebronics", image: zebronics },
   { id: 25, name: "Uber Eats", image: ubereats },
-    { id: 26, name: "cordon technologies", image: cordan},
-        { id: 27, name: "techvision" ,image: techvision},
+  { id: 26, name: "cordon technologies", image: cordan },
+  { id: 27, name: "techvision", image: techvision },
 
 ];
 
@@ -69,33 +69,29 @@ const SponsorCard = ({ sponsor }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       className="flex-shrink-0 w-48 mx-6 transition-all duration-300"
-      
+
     >
       {/* Circular Image */}
       <div className="relative mb-4 group">
-        <div className={`w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-[#434343]/30 transition-all duration-500 ${
-          isHovered ? 'border-[#434343] scale-110 shadow-2xl shadow-[#434343]/50' : ''
-        }`}>
+        <div className={`w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-[#434343]/30 transition-all duration-500 ${isHovered ? 'border-[#434343] scale-110 shadow-2xl shadow-[#434343]/50' : ''
+          }`}>
           <img
             src={sponsor.image}
             alt={sponsor.name}
-            className={`w-full h-full object-cover transition-all duration-700 ${
-              isHovered ? 'scale-110 rotate-6' : 'scale-100 rotate-0'
-            }`}
+            className={`w-full h-full object-cover transition-all duration-700 ${isHovered ? 'scale-110 rotate-6' : 'scale-100 rotate-0'
+              }`}
           />
         </div>
-        
+
         {/* Glow effect on hover */}
-        <div className={`absolute inset-0 rounded-full bg-[#434343]/20 blur-xl transition-opacity duration-500 ${
-          isHovered ? 'opacity-100' : 'opacity-0'
-        }`}></div>
+        <div className={`absolute inset-0 rounded-full bg-[#434343]/20 blur-xl transition-opacity duration-500 ${isHovered ? 'opacity-100' : 'opacity-0'
+          }`}></div>
       </div>
 
       {/* Sponsor Name */}
       <div className="text-center">
-        <h3 className={`text-white font-bold text-lg transition-all duration-300 ${
-          isHovered ? 'text-gray-300 scale-105' : ''
-        }`}>
+        <h3 className={`text-white font-bold text-lg transition-all duration-300 ${isHovered ? 'text-gray-300 scale-105' : ''
+          }`}>
           {sponsor.name}
         </h3>
       </div>
@@ -140,11 +136,11 @@ export default function Sponsors() {
           <div className="inline-block mb-4">
             <span className="text-gray-400 text-sm font-semibold tracking-widest uppercase flex items-center gap-2 justify-center">
               <Award size={16} />
-              Our 
+              Our
             </span>
             <div className="h-0.5 bg-gradient-to-r from-transparent via-gray-600 to-transparent mt-2"></div>
           </div>
-          
+
           <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 relative inline-block">
             Sponsors
             <div className="absolute -bottom-4 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-gray-600 to-transparent"></div>
